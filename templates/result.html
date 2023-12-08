@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naver Blog Title Extractor</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+</head>
+
+<body>
+    <main class="container">
+        <form action="/">
+            <input type="text" name="link" placeholder="{{link}}" />
+            <button>검색</button>
+        </form>
+        <hr />
+        <div>
+            <h5>목차</h5>
+            <div id="content">
+                {% for title in data %}
+                <div>{{title}}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <br />
+        <button id="copy">복사하기</button>
+    </main>
+</body>
+<script>
+    const content = document.getElementById("content");
+    document.getElementById("copy").onclick = () => {
+        window.navigator.clipboard.writeText(content.textContent).then(() => {
+            alert("복사완료");
+        });
+    };
+</script>
+
+</html>
