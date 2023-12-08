@@ -22,3 +22,4 @@ def home():
 
   else:
     return render_template("home.html")
+  
