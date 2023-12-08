@@ -22,6 +22,3 @@ def home():
 
   else:
     return render_template("home.html")
-
-
-app.run("0.0.0.0")
