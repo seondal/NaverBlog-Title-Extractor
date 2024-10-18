@@ -7,6 +7,7 @@ def extract_boj(link):
     soup = BeautifulSoup(response.text, "html.parser")
     
     result = {}
+    result['type'] = 'boj'
 
     # 링크
     result['link'] = link
@@ -24,8 +25,15 @@ def extract_boj(link):
     # 문제
     problem_div = soup.find("div", id="problem_description")
     if problem_div:
-        p_tags = problem_div.find_all("p")  # <p> 요소들을 리스트로 가져옴
-        contents = [p.get_text(strip=True) for p in p_tags] # 각 <p> 요소의 텍스트 추출
-        result['content'] = contents
+        result['content'] = problem_div.get_text(separator="\n", strip=True)  # 모든 텍스트를 가져오고 줄바꿈 및 공백 제거
+
+    # 입출력
+    input_div = soup.find("div", id="problem_input")
+    if input_div:
+        result['input'] = input_div.get_text(separator="\n", strip=True)
+    output_div = soup.find("div", id="problem_output")
+    if output_div:
+        result['output'] = output_div.get_text(separator="\n", strip=True)
+
 
     return result

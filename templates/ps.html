@@ -23,11 +23,27 @@
             <h3>{{data.blog_title}}</h3>
             <div>{{data.link}}</div>
             <h2>문제</h2>
+
+            {% if data.type == 'programmers'%}
             <div>
                 {% for line in data.content %}
                 <p>{{line}}</p>
                 {% endfor %}
             </div>
+            {% elif data.type == 'boj' %}
+            <p>{{ data.content | replace('\n', '<br>') | safe }}</p>
+            {% endif %}
+
+            {% if 'input' in data %}
+            <h2>입력</h2>
+            <div>{{data.input}}</div>
+            {% endif %}
+
+            {% if 'output' in data %}
+            <h2>출력</h2>
+            <div>{{data.output}}</div>
+            {% endif %}
+
             <br />
             <h2>풀이</h2>
         </div>

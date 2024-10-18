@@ -10,6 +10,7 @@ def extract_programmers(link):
     
     # 링크
     result['link'] = link
+    result['type'] = 'programmers'
 
     # 번호
     result['id'] = link.split("/")[-1]
