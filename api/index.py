@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from extractors.blog import extract_blog_title
+from extractors.programmers import extract_programmers
+from extractors.boj import extract_boj
 
 app = Flask("Naver Blog Title Extractor")
 
@@ -23,3 +25,18 @@ def home():
   else:
     return render_template("home.html")
   
+@app.route("/ps")
+def programmers():
+  if "link" in request.args:
+    link = request.args.get("link")
+
+    if link.startswith("https://www.acmicpc.net/problem/"):
+      data = extract_boj(link)
+    elif link.startswith("https://school.programmers.co.kr/"):
+      data = extract_programmers(link)
+    else:
+      alert("올바른 url을 입력해주세요")
+      return
+
+    return render_template("ps.html", link=link, data=data)
+  return render_template("ps.html")
