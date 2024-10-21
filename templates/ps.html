@@ -38,12 +38,12 @@
 
             {% if 'input' in data %}
             <h2>입력</h2>
-            <div>{{data.input}}</div>
+            <p>{{ data.input | replace('\n', '<br>') | safe }}</p>
             {% endif %}
 
             {% if 'output' in data %}
             <h2>출력</h2>
-            <div>{{data.output}}</div>
+            <p>{{ data.output | replace('\n', '<br>') | safe }}</p>
             {% endif %}
 
             <br />

@@ -1,6 +1,14 @@
 from requests import get
 from bs4 import BeautifulSoup
 
+def get_refined_text(div):
+    text = ""
+    for p in div:
+        if p.name == 'p':
+            text += f"{p.get_text(strip=True)}\n"
+    return text
+
+
 def extract_boj(link): 
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"}
     response = get(f"{link}", headers=headers)
@@ -25,15 +33,15 @@ def extract_boj(link):
     # 문제
     problem_div = soup.find("div", id="problem_description")
     if problem_div:
-        result['content'] = problem_div.get_text(separator="\n", strip=True)  # 모든 텍스트를 가져오고 줄바꿈 및 공백 제거
+        result['content'] = get_refined_text(problem_div)
 
     # 입출력
     input_div = soup.find("div", id="problem_input")
     if input_div:
-        result['input'] = input_div.get_text(separator="\n", strip=True)
+        result['input'] = get_refined_text(input_div)
     output_div = soup.find("div", id="problem_output")
     if output_div:
-        result['output'] = output_div.get_text(separator="\n", strip=True)
+        result['output'] = get_refined_text(output_div)
 
 
     return result
