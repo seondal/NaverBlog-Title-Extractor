@@ -1,8 +1,12 @@
-#blog_content {
+html {
+  padding: 2rem;
+}
+
+#content {
   border: solid 1px lightslategrey;
   background-color: white;
 }
 
-#blog_content * {
+#content * {
   color: black;
 }

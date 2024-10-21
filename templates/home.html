@@ -11,22 +11,7 @@
 <h1>네이버 블로그 목차 자동 생성기</h1>
 <h5>링크를 입력하면 해당 포스팅에 쓰인 소제목들을 추출합니다.</h5>
 <form action="/">
-    <input type="text" name="link" placeholder="원하는 블로그 글의 URL을 입력하세요 (전체공개 포스팅만 가능합니다)" />
+    <input type="text" name="link" required placeholder="원하는 블로그 글의 URL을 입력하세요 (전체공개 포스팅만 가능합니다)" />
     <button>검색</button>
 </form>
-{% endblock %}
-
-{% block scripts %}
-<script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NNKCBKB4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-Q7NNKCBKB4');
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
 {% endblock %}

@@ -18,31 +18,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block meta %}
+    <!-- 하위 템플릿 메타데이터 -->
     {% endblock %}
     <meta name="naver-site-verification" content="ce4aa68b4de1e14ccbf750c3c46d667a954f2ed5" />
     <meta name="google-site-verification" content="hxia-T9cKZR36EItcL1XVnYqDWjWvO8ZUJQVOTkN34g" />
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
     <header>
         <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
+            <a href="/">네이버 블로그 목차 생성기</a>
+            <a href="/ps">알고리즘 문제풀이 블로그 자동화</a>
+            <a href="https://litt.ly/seondal">이 사이트 만든 사람</a>
         </nav>
     </header>
-    <main class="container">
+    <main>
         {% block content %}
-        <!-- 하위 템플릿이 여기에 삽입됨 -->
+        <!-- 하위 템플릿 본문 -->
         {% endblock %}
     </main>
 </body>
 
-<footer>
-    <a href="https://litt.ly/seondal">이 사이트 만든 사람</a>
-</footer>
+<script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NNKCBKB4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
+    gtag('config', 'G-Q7NNKCBKB4');
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 {% block scripts %}
+<!-- 하위 템플릿 스크립트-->
 {% endblock %}
 
 </html>
