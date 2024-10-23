@@ -1,6 +1,15 @@
 from requests import get
 from bs4 import BeautifulSoup
 
+def get_refined_table(table):
+    table_data = []
+    
+    table_data.append("---")
+    for row in table.find_all('tr'):
+        table_data.append(row.get_text())
+    table_data.append("---")
+
+    return table_data
 
 def extract_programmers(link):
     result = {}
@@ -29,10 +38,13 @@ def extract_programmers(link):
         contents = []
         next_tag = h5_tag.find_next_sibling()
 
-        while next_tag and next_tag.name != 'hr':  # <hr/> 태그가 나오기 전까지의 모든 <p> 요소를 추출
-            if next_tag.name == 'p':
-                contents.append(next_tag.get_text())  # <p> 태그의 텍스트 추출
-                next_tag = next_tag.find_next_sibling()  # 다음 형제 요소로 이동
+        while next_tag and next_tag.name != 'hr':  # <hr/> 태그가 나오기 전까지의 모든 요소를 추출
+            if next_tag.name == 'table':
+                contents.extend(get_refined_table(next_tag))
+                print(get_refined_table(next_tag))
+            else:
+                contents.append(next_tag.get_text())
+            next_tag = next_tag.find_next_sibling()  # 다음 형제 요소로 이동
 
         result['content'] = contents
 
