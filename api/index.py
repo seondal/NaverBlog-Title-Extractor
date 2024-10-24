@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 
 from extractors.blog import extract_blog_title
 from extractors.programmers import extract_programmers
 from extractors.boj import extract_boj
 
-app = Flask("네이버 블로그 목차 생성기")
+app = Flask(__name__)
 
+@app.route('/robots.txt')
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 @app.route("/")
 def blog():
@@ -28,7 +32,7 @@ def blog():
 
   else:
     return render_template("blog.html")
-  
+
 @app.route("/ps")
 def ps():
   if "link" in request.args:
