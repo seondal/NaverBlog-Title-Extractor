@@ -4,7 +4,7 @@ from extractors.blog import extract_blog_title
 from extractors.programmers import extract_programmers
 from extractors.boj import extract_boj
 
-app = Flask(__name__)
+app = Flask("네이버 블로그 목차 생성기")
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
