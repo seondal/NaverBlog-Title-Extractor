@@ -17,12 +17,3 @@
 </div>
 <br />
 {% endblock %}
-
-{% block scripts %}
-<script>
-    function copyText() {
-        navigator.clipboard.writeText(document.getElementById('content').innerText);
-        alert("복사 되었습니다!")
-    }
-</script>
-{% endblock %}
