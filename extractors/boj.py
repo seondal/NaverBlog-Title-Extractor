@@ -24,11 +24,22 @@ def extract_boj(link):
     result['id'] = link.split("/")[-1]
     result['blog_title'] = f"[BOJ][C++] 백준 {result['id']}번: "
 
+    # 난이도
+    response2 = get(f"https://solved.ac/search?query={result['id']}", headers=headers)
+    soup2 = BeautifulSoup(response2.text, "html.parser")
+    a_tag = soup2.find('a', href=link)
+    if a_tag:
+        img_tag = a_tag.find('img')
+
+        if img_tag and 'alt' in img_tag.attrs:
+            alt_text = img_tag['alt']
+            result['level'] = alt_text
+
     # 제목
     span_tag = soup.find("span", id="problem_title")
     if span_tag:
         result['title'] = span_tag.string.strip()
-        result['blog_title'] += result['title']
+        result['blog_title'] += f"{result['title']} ({result['level']})"
         
     # 문제
     problem_div = soup.find("div", id="problem_description")
