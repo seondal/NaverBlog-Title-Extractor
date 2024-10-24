@@ -2,16 +2,16 @@
 
 {% block meta %}
 <title>네이버 블로그 목차 생성기</title>
-<meta name="description" content="포스팅 링크를 넣으면 해당 포스팅에 쓰인 소제목을 추출해서 목차를 만들어드려요">
-<meta property="og:title" content="네이버 블로그 목차 자동 생성기">
-<meta property="og:description" content="포스팅 링크를 넣으면 해당 포스팅에 쓰인 소제목을 추출해서 목차를 만들어드려요">
+<meta name="description" content="네이버 블로그 링크를 입력하면 해당 포스팅에 쓰인 소제목들을 추출해드려요">
+<meta property="og:title" content="네이버 블로그 목차 생성기">
+<meta property="og:description" content="네이버 블로그 링크를 입력하면 해당 포스팅에 쓰인 소제목들을 추출해드려요">
 {% endblock %}
 
 {% block content %}
-<h1>네이버 블로그 목차 자동 생성기</h1>
-<h5>링크를 입력하면 해당 포스팅에 쓰인 소제목들을 추출합니다.</h5>
+<h1>네이버 블로그 목차 생성기</h1>
+<h5>네이버 블로그 링크를 입력하면 해당 포스팅에 쓰인 소제목들을 추출해드려요</h5>
 <form action="/">
-    <input type="text" name="link" required placeholder="원하는 블로그 글의 URL을 입력하세요 (전체공개 포스팅만 가능합니다)" />
+    <input type="text" name="link" required placeholder="네이버 블로그 글의 URL을 입력하세요 (전체공개 포스팅만 가능합니다)" />
     <button>검색</button>
 </form>
 {% endblock %}

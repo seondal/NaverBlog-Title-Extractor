@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<title>알고리즘 문제풀이 블로그 자동화</title>
-<meta name="description" content="알고리즘 문제 링크(프로그래머스, 백준)를 입력하면 자동으로 블로그 서식을 써드려요">
-<meta property="og:title" content="알고리즘 문제풀이 블로그 자동화">
-<meta property="og:description" content="알고리즘 문제 링크(프로그래머스, 백준)를 입력하면 자동으로 블로그 서식을 써드려요">
+<title>알고리즘 문제풀이 블로그 자동 서식</title>
+<meta name="description" content="프로그래머스/백준 문제 링크를 입력하면 블로그 서식에 맞게 만들어드려요">
+<meta property="og:title" content="알고리즘 문제풀이 블로그 자동 서식">
+<meta property="og:description" content="프로그래머스/백준 문제 링크를 입력하면 블로그 서식에 맞게 만들어드려요">
 {% endblock %}
 
 {% block content %}
-<h1>알고리즘 문제풀이 블로그 자동화</h1>
-<h5>프로그래머스/백준 문제 링크를 입력하면 블로그 서식에 맞게 만들어드립니다</h5>
+<h1>알고리즘 문제풀이 블로그 자동 서식</h1>
+<h5>프로그래머스/백준 문제 링크를 입력하면 블로그 서식에 맞게 만들어드려요</h5>
 <form action="/ps">
-    <input type="text" name="link" required placeholder="프로그래머스/백준 문제 링크" />
+    <input type="text" name="link" required placeholder="프로그래머스/백준 문제 링크 입력" />
     <button>검색</button>
 </form>
 <hr />
