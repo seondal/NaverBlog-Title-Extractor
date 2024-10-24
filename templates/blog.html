@@ -8,6 +8,7 @@
 <hr />
 <div>
     <h5>목차</h5>
+    <button onclick="copyText()">복사하기</button>
     <div id="content">
         {% for title in data %}
         <div>{{title}}</div>
@@ -15,16 +16,13 @@
     </div>
 </div>
 <br />
-<button id="copy">복사하기</button>
 {% endblock %}
 
 {% block scripts %}
 <script>
-    const content = document.getElementById("content");
-    document.getElementById("copy").onclick = () => {
-        window.navigator.clipboard.writeText(content.textContent).then(() => {
-            alert("복사완료");
-        });
-    };
+    function copyText() {
+        navigator.clipboard.writeText(document.getElementById('content').innerText);
+        alert("복사 되었습니다!")
+    }
 </script>
 {% endblock %}

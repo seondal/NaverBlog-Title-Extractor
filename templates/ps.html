@@ -17,6 +17,8 @@
 <hr />
 
 {% if data %}
+<button onclick="copyHTML()">복사하기</button>
+
 <div id="content">
     <h3>{{data.blog_title}}</h3>
     <div>{{data.link}}</div>
@@ -46,20 +48,33 @@
     <h2>풀이</h2>
 </div>
 {% endif %}
+
 {% endblock %}
 
 {% block scripts %}
 <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NNKCBKB4"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'G-Q7NNKCBKB4');
+<script>
+    function copyHTML() {
+        const element = document.getElementById('content');
+
+        // 선택 영역을 만들기 위해 Range와 Selection 객체 사용
+        const range = document.createRange();
+        range.selectNodeContents(element);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges(); // 기존 선택 영역 제거
+        selection.addRange(range); // 새로운 선택 영역 추가
+
+        // 복사 실행
+        document.execCommand('copy');
+
+        // 선택 영역 해제
+        selection.removeAllRanges();
+        alert("복사 되었습니다!")
+    }
 </script>
-<script defer src="/_vercel/insights/script.js"></script>
 
 {% endblock %}
