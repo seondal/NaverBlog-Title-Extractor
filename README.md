@@ -1,8 +1,8 @@
-## Link
+## 🔗 Link
 
 https://auto-blog.seondal.kr
 
-## Feature
+## ✨ Feature
 
 #### 1. 네이버 블로그 목차 생성기
 
@@ -13,7 +13,7 @@ https://auto-blog.seondal.kr
 
 - 프로그래머스/백준 문제 링크를 입력하면 블로그 서식에 맞게 만들어드려요
 
-## Stack
+## 📚 Stack
 
 - python
 - bs4
