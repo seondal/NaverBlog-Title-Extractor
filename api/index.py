@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
+
 from extractors.blog import extract_blog_title
 from extractors.programmers import extract_programmers
 from extractors.boj import extract_boj
 
-app = Flask("Naver Blog Title Extractor")
+app = Flask("네이버 블로그 목차 생성기")
 
 
 @app.route("/")
@@ -29,7 +30,7 @@ def blog():
     return render_template("blog.html")
   
 @app.route("/ps")
-def programmers():
+def ps():
   if "link" in request.args:
     link = request.args.get("link")
 
