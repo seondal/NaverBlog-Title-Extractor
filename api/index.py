@@ -7,7 +7,7 @@ app = Flask("Naver Blog Title Extractor")
 
 
 @app.route("/")
-def home():
+def blog():
   if "link" in request.args:
     link = request.args.get("link")
     
@@ -26,7 +26,7 @@ def home():
     return render_template("blog.html", link=link, data=data)
 
   else:
-    return render_template("home.html")
+    return render_template("blog.html")
   
 @app.route("/ps")
 def programmers():
