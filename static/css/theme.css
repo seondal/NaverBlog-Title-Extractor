@@ -1,0 +1,46 @@
+/* Orange color for light color scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+  --pico-text-selection-color: rgba(
+    255,
+    182,
+    193,
+    0.25
+  ); /* 부드러운 핑크 투명도 */
+  --pico-primary: #ffb6c1; /* 연한 핑크색 */
+  --pico-primary-background: #ffd1dc; /* 핑크색 배경 */
+  --pico-primary-underline: rgba(255, 160, 220, 0.5); /* 연보라색 반투명 */
+  --pico-primary-hover: #ff85a2; /* 조금 더 짙은 핑크 */
+  --pico-primary-hover-background: #ffb6c1; /* 연한 핑크 */
+  --pico-primary-focus: rgba(173, 216, 230, 0.5); /* 하늘색 투명도 */
+  --pico-primary-inverse: #fff; /* 흰색 유지 */
+}
+
+/* Orange color for dark color scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --pico-text-selection-color: rgba(255, 182, 193, 0.35); /* 핑크 투명도 */
+    --pico-primary: #ffd1dc; /* 연한 핑크 */
+    --pico-primary-background: #b19cd9; /* 연보라색 */
+    --pico-primary-underline: rgba(201, 160, 220, 0.5); /* 연보라색 반투명 */
+    --pico-primary-hover: #ff85a2; /* 짙은 핑크 */
+    --pico-primary-hover-background: #ffd1dc; /* 연한 핑크 */
+    --pico-primary-focus: rgba(173, 216, 230, 0.5); /* 하늘색 투명도 */
+    --pico-primary-inverse: #f5f5f5; /* 부드러운 흰색 */
+  }
+}
+
+/* Orange color for dark color scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme="dark"] {
+  --pico-text-selection-color: rgba(255, 182, 193, 0.35); /* 핑크 투명도 */
+  --pico-primary: #ffd1dc; /* 연한 핑크 */
+  --pico-primary-background: #b19cd9; /* 연보라색 */
+  --pico-primary-underline: rgba(201, 160, 220, 0.5); /* 연보라색 반투명 */
+  --pico-primary-hover: #ff85a2; /* 짙은 핑크 */
+  --pico-primary-hover-background: #ffd1dc; /* 연한 핑크 */
+  --pico-primary-focus: rgba(173, 216, 230, 0.5); /* 하늘색 투명도 */
+  --pico-primary-inverse: #f5f5f5; /* 부드러운 흰색 */
+}
