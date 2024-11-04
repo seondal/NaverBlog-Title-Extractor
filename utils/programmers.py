@@ -27,7 +27,7 @@ def extract_programmers(link, lang):
     result['id'] = link.split("/")[-1]
 
     # 언어
-    language_button = soup.find("button", "btn btn-sm btn-dark dropdown-toggle")
+    language_button = soup.find("button", class_="btn btn-sm btn-dark dropdown-toggle")
     language = language_button.get_text().strip()
 
     isSQL = language == "MySQL"
@@ -50,7 +50,7 @@ def extract_programmers(link, lang):
         result['blog_title'] += f"(level{level})"
         
     # 문제
-    problem_title_tag = soup.find("h5", text="문제") if isSQL else soup.find("h6", text="문제 설명")
+    problem_title_tag = soup.find("h5", string="문제") if isSQL else soup.find("h6", string="문제 설명")
     if problem_title_tag:
         contents = []
         next_tag = problem_title_tag.find_next_sibling()
