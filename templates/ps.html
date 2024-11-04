@@ -10,25 +10,38 @@
 {% block content %}
 <h1>알고리즘 문제풀이 블로그 자동 서식</h1>
 <h5>프로그래머스/백준 문제 링크를 입력하면 블로그 서식에 맞게 만들어드려요</h5>
-<form action="/ps">
-    <input type="text" name="link" required placeholder="프로그래머스/백준 문제 링크 입력" />
-    <!---->
-    <label for="lang">언어</label>
-    <select name="lang" id="lang">
-        {% for lang in langs %}
-        <option value={{lang}}>{{lang}}</option>
-        {% endfor %}
-    </select>
 
-    <button>생성하기</button>
+<form action="/ps">
+    <fieldset role="group">
+        {% if data %}
+        <input type="text" name="link" id="link" required value={{link}} />
+        {% else %}
+        <input type="text" name="link" id="link" required placeholder="문제링크" />
+        {% endif %}
+
+        <select name="lang" id="lang">
+            {% for item in langs %}
+
+            {% if data %}
+            <option value={{item}} {% if item==language %}selected{% endif %}>{{item}}</option>
+            {% else %}
+            <option value={{item}}>{{item}}</option>
+            {% endif %}
+
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="생성하기" />
+    </fieldset>
 </form>
 <hr />
 
 {% if data %}
-<button onclick="copyHTML()">복사하기</button>
-
-<div id="content">
-    <h3>{{data.blog_title}}</h3>
+<article id="content">
+    <header>
+        <button class="outline" onclick="copyHTML()">복사하기</button>
+    </header>
+    <h2>{{data.blog_title}}</h2>
     <div>{{data.link}}</div>
     <h2>문제</h2>
 
@@ -54,7 +67,7 @@
 
     <br />
     <h2>풀이</h2>
-</div>
+</article>
 {% endif %}
 
 {% endblock %}

@@ -10,15 +10,15 @@
 {% block content %}
 <h1>네이버 블로그 목차 생성기</h1>
 <h5>네이버 블로그 링크를 입력하면 해당 포스팅에 쓰인 소제목들을 추출해드려요</h5>
-<form action="/">
+<form role="search" action="/">
     <input type="text" name="link" required placeholder="네이버 블로그 글의 URL을 입력하세요 (전체공개 포스팅만 가능합니다)" />
-    <button>검색</button>
+    <input type="submit" value="검색" />
 </form>
 
 {% if data %}
 <div>
     <h5>목차</h5>
-    <button onclick="copyText()">복사하기</button>
+    <button class="outline" onclick="copyText()">복사하기</button>
     <div id="content">
         {% for title in data %}
         <div>{{title}}</div>

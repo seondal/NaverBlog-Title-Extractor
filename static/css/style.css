@@ -2,11 +2,9 @@ html {
   padding: 2rem;
 }
 
-#content {
-  border: solid 1px lightslategrey;
-  background-color: white;
-}
-
-#content * {
-  color: black;
+@media (min-width: 769px) {
+  html {
+    padding-left: 12rem;
+    padding-right: 12rem;
+  }
 }
