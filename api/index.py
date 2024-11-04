@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, send_from_directory
 
-from extractors.blog import extract_blog_title
-from extractors.programmers import extract_programmers
-from extractors.boj import extract_boj
+from utils.blog import extract_blog_title
+from utils.programmers import extract_programmers
+from utils.boj import extract_boj
 
 app = Flask("네이버 블로그 목차 생성기")
 
