@@ -9,20 +9,27 @@ def get_refined_text(div):
     return text
 
 
-def extract_boj(link): 
+def extract_boj(link, lang): 
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"}
     response = get(f"{link}", headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
     
     result = {}
+
     result['type'] = 'boj'
+    result['blog_title'] = f"[BOJ]"
 
     # 링크
     result['link'] = link
 
+    # 언어
+    if lang != "None":
+        result['blog_title'] += f"[{lang}]"
+    
     # 번호
     result['id'] = link.split("/")[-1]
-    result['blog_title'] = f"[BOJ][C++] 백준 {result['id']}번: "
+    result['blog_title'] += f" 백준 {result['id']}번: "
+
 
     # 난이도
     response2 = get(f"https://solved.ac/search?query={result['id']}", headers=headers)
