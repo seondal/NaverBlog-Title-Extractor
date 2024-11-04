@@ -33,19 +33,39 @@ def blog():
   else:
     return render_template("blog.html")
 
-@app.route("/ps")
+@app.route("/ps", methods=['GET', 'POST'])
 def ps():
-  if "link" in request.args:
+  LANGUAGES = ["None","JavaScript","PHP","Java","Golang","Python","C#","C++","Erlang"]
+
+  if "link" in request.args and "lang" in request.args:
+    lang = request.args.get("lang")
     link = request.args.get("link")
 
     if link.startswith("https://www.acmicpc.net/problem/"):
-      data = extract_boj(link)
-      return render_template("ps.html", link=link, data=data)
+      data = extract_boj(link, lang)
+      return render_template("ps.html", langs=LANGUAGES, link=link, data=data, language=lang)
     elif link.startswith("https://school.programmers.co.kr/"):
-      data = extract_programmers(link)
-      return render_template("ps.html", link=link, data=data)
+      data = extract_programmers(link, lang)
+      return render_template("ps.html", langs=LANGUAGES, link=link, data=data, language=lang)
     else:
       return render_template("error.html", message="프로그래머스(https://school.programmers.co.kr/)나 백준(https://www.acmicpc.net/problem/) 문제 링크만 가능합니다")
   
   else:
-    return render_template("ps.html")
+    return render_template("ps.html", langs=LANGUAGES)
+
+@app.route("/test/ps")
+def test_ps():
+  if "link" in request.args and "lang" in request.args:
+    lang = request.args.get("lang")
+    link = request.args.get("link")
+
+    if link.startswith("https://www.acmicpc.net/problem/"):
+      data = extract_boj(link, lang)
+      return data
+    elif link.startswith("https://school.programmers.co.kr/"):
+      data = extract_programmers(link, lang)
+      return data
+    else:
+      return "에러페이지"   
+  else:
+    return "기본페이지"
