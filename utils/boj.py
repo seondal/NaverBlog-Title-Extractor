@@ -30,6 +30,11 @@ def extract_boj(link, lang):
     result['id'] = link.split("/")[-1]
     result['blog_title'] += f" 백준 {result['id']}번: "
 
+    # 제목
+    span_tag = soup.find("span", id="problem_title")
+    if span_tag:
+        result['title'] = span_tag.string.strip()
+        result['blog_title'] += f"{result['title']}"
 
     # 난이도
     response2 = get(f"https://solved.ac/search?query={result['id']}", headers=headers)
@@ -41,12 +46,8 @@ def extract_boj(link, lang):
         if img_tag and 'alt' in img_tag.attrs:
             alt_text = img_tag['alt']
             result['level'] = alt_text
+            result['level'] += f" ({result['level']})"
 
-    # 제목
-    span_tag = soup.find("span", id="problem_title")
-    if span_tag:
-        result['title'] = span_tag.string.strip()
-        result['blog_title'] += f"{result['title']} ({result['level']})"
         
     # 문제
     problem_div = soup.find("div", id="problem_description")
