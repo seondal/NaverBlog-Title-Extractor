@@ -25,12 +25,18 @@ def extract_programmers(link):
     result['id'] = link.split("/")[-1]
     result['blog_title'] = f"[프로그래머스][SQL] "
 
+
     # 제목
     span_tag = soup.find("span", class_="challenge-title")
     if span_tag:
         result['title'] = span_tag.string.strip()
-        result['blog_title'] += f"{result['title']} ({result['id']})"
+        result['blog_title'] += f"{result['title']} "
 
+    # 난이도
+    lesson_tag = soup.find("div", class_="lesson-content")
+    if lesson_tag and lesson_tag.has_attr("data-challenge-level"):
+        level = lesson_tag["data-challenge-level"]
+        result['blog_title'] += f"(level{level})"
         
     # 문제
     h5_tag = soup.find("h5", text="문제")
