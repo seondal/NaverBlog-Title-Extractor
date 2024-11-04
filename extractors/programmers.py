@@ -23,8 +23,13 @@ def extract_programmers(link):
 
     # 번호
     result['id'] = link.split("/")[-1]
-    result['blog_title'] = f"[프로그래머스][SQL] "
 
+    # 언어
+    language_button = soup.find("button", "btn btn-sm btn-dark dropdown-toggle")
+    language = language_button.get_text().strip()
+    result['blog_title'] = f"[프로그래머스][{language}] "
+
+    isSQL = language == "MySQL"
 
     # 제목
     span_tag = soup.find("span", class_="challenge-title")
@@ -39,10 +44,10 @@ def extract_programmers(link):
         result['blog_title'] += f"(level{level})"
         
     # 문제
-    h5_tag = soup.find("h5", text="문제")
-    if h5_tag:
+    problem_title_tag = soup.find("h5", text="문제") if isSQL else soup.find("h6", text="문제 설명")
+    if problem_title_tag:
         contents = []
-        next_tag = h5_tag.find_next_sibling()
+        next_tag = problem_title_tag.find_next_sibling()
 
         while next_tag and next_tag.name != 'hr':  # <hr/> 태그가 나오기 전까지의 모든 요소를 추출
             if next_tag.name == 'table':
