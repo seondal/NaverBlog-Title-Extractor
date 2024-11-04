@@ -11,15 +11,17 @@ def get_refined_table(table):
 
     return table_data
 
-def extract_programmers(link):
+def extract_programmers(link, lang):
     result = {}
     
     response = get(f"{link}")
     soup = BeautifulSoup(response.text, "html.parser")
     
+    result['type'] = 'programmers'
+    result['blog_title'] = f"[프로그래머스]"
+
     # 링크
     result['link'] = link
-    result['type'] = 'programmers'
 
     # 번호
     result['id'] = link.split("/")[-1]
@@ -27,15 +29,19 @@ def extract_programmers(link):
     # 언어
     language_button = soup.find("button", "btn btn-sm btn-dark dropdown-toggle")
     language = language_button.get_text().strip()
-    result['blog_title'] = f"[프로그래머스][{language}] "
 
     isSQL = language == "MySQL"
+    if isSQL is False:
+        language = lang
+        
+    if language != "None":
+        result['blog_title'] += f"[{language}]"
 
     # 제목
     span_tag = soup.find("span", class_="challenge-title")
     if span_tag:
         result['title'] = span_tag.string.strip()
-        result['blog_title'] += f"{result['title']} "
+        result['blog_title'] += f" {result['title']} "
 
     # 난이도
     lesson_tag = soup.find("div", class_="lesson-content")
