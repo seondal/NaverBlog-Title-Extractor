@@ -46,7 +46,7 @@ def extract_boj(link, lang):
         if img_tag and 'alt' in img_tag.attrs:
             alt_text = img_tag['alt']
             result['level'] = alt_text
-            result['level'] += f" ({result['level']})"
+            result['blog_title'] += f" ({result['level']})"
 
         
     # 문제
