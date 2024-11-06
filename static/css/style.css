@@ -2,7 +2,7 @@ html {
   padding: 2rem;
 }
 
-@media (max-width: 900) {
+@media (min-width: 1200px) {
   html {
     padding-left: 12rem;
     padding-right: 12rem;
