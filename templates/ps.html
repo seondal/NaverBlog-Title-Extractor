@@ -19,6 +19,7 @@
         <input type="text" name="link" id="link" required placeholder="문제링크" />
         {% endif %}
 
+        {% if langs %}
         <select name="lang" id="lang" style="width: fit-content;">
             {% for item in langs %}
 
@@ -30,6 +31,7 @@
 
             {% endfor %}
         </select>
+        {% endif %}
 
         <input type="submit" value="생성하기" />
     </fieldset>
@@ -53,6 +55,12 @@
     </div>
     {% elif data.type == 'boj' %}
     <p>{{ data.content | replace('\n', '<br>') | safe }}</p>
+    {% else %}
+    <div>
+        <!-- {% for line in data.content %}
+        <p>{{line}}</p>
+        {% endfor %} -->
+    </div>
     {% endif %}
 
     {% if 'input' in data %}
