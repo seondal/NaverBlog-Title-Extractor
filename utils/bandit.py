@@ -8,10 +8,17 @@ def extract_bandit(link):
     soup = BeautifulSoup(response.text, "html.parser")
     
     result['type'] = 'bandit'
-    result['blog_title'] = f"[Linux]"
+    result['blog_title'] = f"[OverTheWire][Linux] Bandit Level"
 
     # 링크
     result['link'] = link
+
+    # 제목
+    print(soup.prettify())
+    title_h1 = soup.find("div", id="title").find("h1")
+    print(title_h1)
+    if title_h1:
+        result['blog_title'] += title_h1.get_text()
 
     # 문제
     content_div = soup.find("div", id="content")
@@ -22,13 +29,5 @@ def extract_bandit(link):
                 keywords = ", ".join(lines[i + 1].replace(",", "").split())
                 lines[i + 1] = keywords
         result['content'] = "\n".join(lines)
-
-    # if content_div:
-    #     tmp = []
-    #     elements = content_div.find_all()
-    #     for element in elements:
-    #         tmp += element
-
-    #     result['content'] = tmp
 
     return result
