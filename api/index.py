@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, send_from_directory
 from utils.blog import extract_blog_title
 from utils.programmers import extract_programmers
 from utils.boj import extract_boj
+from utils.bandit import extract_bandit
 
 app = Flask("네이버 블로그 목차 생성기")
 
@@ -47,8 +48,12 @@ def ps():
     elif link.startswith("https://school.programmers.co.kr/"):
       data = extract_programmers(link, lang)
       return render_template("ps.html", langs=LANGUAGES, link=link, data=data, language=lang)
+    elif link.startswith("https://overthewire.org/wargames/bandit/"):
+      data = extract_bandit(link)
+      print(data)
+      return render_template("ps.html", link=link, data=data)
     else:
-      return render_template("error.html", message="프로그래머스(https://school.programmers.co.kr/)나 백준(https://www.acmicpc.net/problem/) 문제 링크만 가능합니다")
+      return render_template("error.html", message="프로그래머스(https://school.programmers.co.kr/), 백준(https://www.acmicpc.net/problem/), Bandit(https://overthewire.org/wargames/bandit/) 문제 링크만 가능합니다")
   
   else:
     return render_template("ps.html", langs=LANGUAGES)
