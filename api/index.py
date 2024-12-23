@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, make_response
 
 from utils.blog import extract_blog_title
 from utils.programmers import extract_programmers
@@ -6,7 +6,37 @@ from utils.boj import extract_boj
 from utils.bandit import extract_bandit
 from utils.dreamhack import extract_dreamhack
 
+from api.ga import ga_event
+import uuid
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 app = Flask("네이버 블로그 목차 생성기")
+
+GA_ID = os.getenv("GA_ID")
+GA_KEY = os.getenv("GA_KEY")
+
+@app.context_processor
+def inject_ga_id():
+  return { "GA_ID": GA_ID }
+
+@app.after_request
+def after_request(response):
+  client_id = request.cookies.get('client_id')
+
+  if not client_id:
+        client_id = str(uuid.uuid4())
+        response.set_cookie('client_id', client_id)
+
+  link = request.args.get("link")  
+  if link:
+    res = ga_event(client_id, link)
+    print(res)
+
+  return response
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
@@ -15,9 +45,8 @@ def static_from_root():
 
 @app.route("/")
 def blog():
-  if "link" in request.args:
-    link = request.args.get("link")
-    
+  link = request.args.get("link")
+  if link:
     if not link.startswith("https://blog.naver.com/"):
       return render_template("error.html", message="https://blog.naver.com/로 시작하는 올바른 네이버 블로그 글 링크를 입력해주세요")
 
