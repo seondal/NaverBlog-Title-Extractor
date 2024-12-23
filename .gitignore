@@ -2,4 +2,3 @@ __pycache__/
 app.py
 node_modules/
 .vercel
-.env
